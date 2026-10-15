@@ -1,0 +1,22 @@
+try {
+    def pe = Class.forName("java.lang.ProcessEnvironment")
+    def envField = pe.getDeclaredField("theEnvironment")
+    envField.setAccessible(true)
+    envField.get(null).remove("ANDROID_PREFS_ROOT")
+
+    def caseInsensitiveEnvField = pe.getDeclaredField("theCaseInsensitiveEnvironment")
+    caseInsensitiveEnvField.setAccessible(true)
+    caseInsensitiveEnvField.get(null).remove("ANDROID_PREFS_ROOT")
+} catch (ignored) {
+}
+
+allprojects {
+    tasks.matching { it.name.contains("Kotlin") || it.name.contains("kotlin") }.configureEach {
+        try {
+            kotlinOptions {
+                freeCompilerArgs += ["-language-version", "1.8", "-api-version", "1.8"]
+            }
+        } catch (ignored) {
+        }
+    }
+}

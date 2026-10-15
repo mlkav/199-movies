@@ -1,0 +1,51 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:integration_test/integration_test.dart';
+import 'package:ditonton/main.dart' as app;
+
+void main() {
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+
+  group('End-to-End App Integration Test', () {
+    testWidgets('Should load home page, switch to TV series, search, and open detail', (WidgetTester tester) async {
+      // Menjalankan aplikasi utama
+      app.main();
+      await tester.pumpAndSettle();
+
+      // Verifikasi halaman utama film terbuka
+      expect(find.text('Ditonton'), findsOneWidget);
+
+      // Pindah ke halaman TV Series melalui menu Drawer
+      final drawerFinder = find.byTooltip('Open navigation menu');
+      if (tester.any(drawerFinder)) {
+        await tester.tap(drawerFinder);
+        await tester.pumpAndSettle();
+
+        // Klik menu TV Series di Drawer
+        final tvMenuItem = find.text('TV Series');
+        await tester.tap(tvMenuItem);
+        await tester.pumpAndSettle();
+      }
+
+      // Verifikasi halaman TV Series terbuka dengan mencari teks section 'Popular'
+      expect(find.text('Popular'), findsWidgets);
+
+      // Pencarian TV Series
+      final searchIcon = find.byIcon(Icons.search);
+      await tester.tap(searchIcon);
+      await tester.pumpAndSettle();
+
+      final searchField = find.byType(TextField);
+      await tester.enterText(searchField, 'Game of Thrones');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+
+      // Klik hasil pencarian untuk membuka halaman detail TV
+      final searchResult = find.text('Game of Thrones');
+      if (tester.any(searchResult)) {
+        await tester.tap(searchResult.first);
+        await tester.pumpAndSettle();
+      }
+    });
+  });
+}

@@ -36,6 +36,8 @@ runTests() {
       fi
 
       if [ -d "coverage" ]; then
+        mkdir -p "$2/coverage"
+
         # combine line coverage info from package tests to a common file
         sed "s/^SF:lib/SF:$escapedPath\/lib/g" coverage/lcov.info >>$2/coverage/test.info
         rm -f coverage/lcov.info

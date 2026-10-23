@@ -1,6 +1,6 @@
 # Ditonton - Aplikasi Katalog Film & TV Series Siap Rilis
 
-![CI](https://github.com/mlkav/199-movies/actions/workflows/ci.yml/badge.svg)
+![CI Ditonton](https://github.com/mlkav/199-movies/actions/workflows/ci.yml/badge.svg)
 
 Aplikasi katalog Film dan TV Series yang dikembangkan mengikuti arsitektur modular, state management BLoC, SSL Pinning, dan integrasi Firebase.
 

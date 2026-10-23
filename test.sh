@@ -106,5 +106,6 @@ esac
 
 # Fail the build if there was an error
 if [ "$error" = true ]; then
-  exit -1
+  echo "Ada pengujian Flutter yang gagal!"
+  exit 1
 fi

@@ -50,21 +50,24 @@ runTests() {
 }
 
 runReport() {
-  if [ -f "coverage/test.info" ] && ! [ "$TRAVIS" ]; then
+  if [ -f "coverage/test.info" ]; then
     if command -v genhtml >/dev/null 2>&1; then
       genhtml coverage/test.info -o coverage --no-function-coverage --prefix "$(pwd)"
 
-      # Buka hasil coverage berdasarkan OS
-      if [ "$(uname)" == "Darwin" ]; then
-        open coverage/index.html
-      elif command -v xdg-open >/dev/null 2>&1; then
-        xdg-open coverage/index.html
-      elif command -v start >/dev/null 2>&1; then
-        start coverage/index.html
+      # Hanya buka browser jika TIDAK berada di lingkungan CI (GitHub Actions, Travis, dll)
+      if [ -z "$CI" ]; then
+        if [ "$(uname)" == "Darwin" ]; then
+          open coverage/index.html
+        elif command -v xdg-open >/dev/null 2>&1; then
+          xdg-open coverage/index.html
+        elif command -v start >/dev/null 2>&1; then
+          start coverage/index.html
+        fi
+      else
+        echo "Lingkungan CI terdeteksi. Melewati perintah pembukaan browser otomatis."
       fi
     else
       echo "PERINGATAN: 'genhtml' (lcov) belum terinstal. Laporan HTML tidak dapat dibuat."
-      echo "Jalankan 'sudo apt install lcov' di terminal Anda untuk menginstalnya."
     fi
   fi
 }

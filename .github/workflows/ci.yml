@@ -3,8 +3,20 @@ name: CI
 on:
   push:
     branches: [ main, master ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '**.png'
+      - '**.jpg'
+      - '.gitignore'
   pull_request:
     branches: [ main, master ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '**.png'
+      - '**.jpg'
+      - '.gitignore'
 
 jobs:
   test:

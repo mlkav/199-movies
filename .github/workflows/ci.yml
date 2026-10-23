@@ -50,6 +50,12 @@ jobs:
               print('Coverage threshold check (>95%) PASSED!')
           "
 
+      - name: Create .env file from Secrets
+        run: |
+          echo "API_KEY=${{ secrets.TMDB_API_KEY }}" >> .env
+          echo "BASE_URL=https://api.themoviedb.org/3/" >> .env
+          echo "BASE_IMAGE_URL=https://image.tmdb.org/t/p/w500/" >> .env
+
       - name: Build APK Release
         run: flutter build apk --release
 

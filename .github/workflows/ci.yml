@@ -1,4 +1,4 @@
-name: CI
+name: CI Ditonton
 
 on:
   push:
@@ -41,6 +41,9 @@ jobs:
           chmod +x ./test.sh
           export PATH="$FLUTTER_ROOT/bin:$PATH"
           ./test.sh || true
+
+      - name: Run Flutter Analyze (Static Analysis)
+        run: flutter analyze
 
       - name: Check code coverage threshold (>95%)
         run: |

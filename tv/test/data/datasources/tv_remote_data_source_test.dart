@@ -163,10 +163,11 @@ void main() {
     );
 
     test('should return season detail when response code is 200', () async {
-      when(mockHttpClient
-              .get(Uri.parse('$baseUrl/tv/$tTvId/season/$tSeasonNumber?$apiKey')))
-          .thenAnswer((_) async =>
-              http.Response('{"id": 1, "name": "Season 1", "overview": "Overview", "poster_path": "/path.jpg", "air_date": "2021-01-01", "season_number": 1, "episodes": []}', 200));
+      when(mockHttpClient.get(
+              Uri.parse('$baseUrl/tv/$tTvId/season/$tSeasonNumber?$apiKey')))
+          .thenAnswer((_) async => http.Response(
+              '{"id": 1, "name": "Season 1", "overview": "Overview", "poster_path": "/path.jpg", "air_date": "2021-01-01", "season_number": 1, "episodes": []}',
+              200));
 
       final result = await dataSource.getTVSeasonDetail(tTvId, tSeasonNumber);
 
@@ -175,8 +176,8 @@ void main() {
 
     test('should throw Server Exception when response code is 404 or other',
         () async {
-      when(mockHttpClient
-              .get(Uri.parse('$baseUrl/tv/$tTvId/season/$tSeasonNumber?$apiKey')))
+      when(mockHttpClient.get(
+              Uri.parse('$baseUrl/tv/$tTvId/season/$tSeasonNumber?$apiKey')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
 
       final call = dataSource.getTVSeasonDetail(tTvId, tSeasonNumber);
@@ -194,8 +195,8 @@ void main() {
     test('should return list of TV Model when response code is 200', () async {
       when(mockHttpClient
               .get(Uri.parse('$baseUrl/tv/$tId/recommendations?$apiKey')))
-          .thenAnswer((_) async =>
-              http.Response(readJson('dummy_data/tv_recommendations.json'), 200));
+          .thenAnswer((_) async => http.Response(
+              readJson('dummy_data/tv_recommendations.json'), 200));
 
       final result = await dataSource.getTVRecommendations(tId);
 

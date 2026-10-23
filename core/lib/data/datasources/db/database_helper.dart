@@ -20,7 +20,8 @@ class DatabaseHelper {
 
   @visibleForTesting
   static Future<Database> Function(String path,
-      {int? version, OnDatabaseCreateFn? onCreate}) openDatabaseFunction = openDatabase;
+      {int? version,
+      OnDatabaseCreateFn? onCreate}) openDatabaseFunction = openDatabase;
 
   @visibleForTesting
   static Future<String> Function() getDatabasesPathFunction = getDatabasesPath;
@@ -37,7 +38,8 @@ class DatabaseHelper {
     final path = await getDatabasesPathFunction();
     final databasePath = '$path/ditonton.db';
 
-    var db = await openDatabaseFunction(databasePath, version: 1, onCreate: _onCreate);
+    var db = await openDatabaseFunction(databasePath,
+        version: 1, onCreate: _onCreate);
     return db;
   }
 

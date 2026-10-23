@@ -7,8 +7,7 @@ import 'package:tv/tv.dart';
 
 import '../../dummy_data/dummy_objects.dart';
 
-class MockWatchlistTVBloc
-    extends MockBloc<WatchlistTVEvent, WatchlistTVState>
+class MockWatchlistTVBloc extends MockBloc<WatchlistTVEvent, WatchlistTVState>
     implements WatchlistTVBloc {}
 
 void main() {

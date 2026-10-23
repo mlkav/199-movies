@@ -46,8 +46,8 @@ void main() {
   blocTest<WatchlistTVBloc, WatchlistTVState>(
     'Should emit [WatchlistTVLoading, WatchlistTVError] when get data is unsuccessful',
     build: () {
-      when(mockGetWatchlistTV.execute())
-          .thenAnswer((_) async => const Left(DatabaseFailure('Database Failure')));
+      when(mockGetWatchlistTV.execute()).thenAnswer(
+          (_) async => const Left(DatabaseFailure('Database Failure')));
       return watchlistTVBloc;
     },
     act: (bloc) => bloc.add(FetchWatchlistTV()),

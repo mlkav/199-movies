@@ -9,7 +9,8 @@ class MovieWatchlistStatusState extends Equatable {
     required this.message,
   });
 
-  factory MovieWatchlistStatusState.initial() => const MovieWatchlistStatusState(
+  factory MovieWatchlistStatusState.initial() =>
+      const MovieWatchlistStatusState(
         isAddedToWatchlist: false,
         message: '',
       );

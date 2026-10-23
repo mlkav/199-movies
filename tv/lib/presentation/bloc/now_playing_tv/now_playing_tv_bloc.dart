@@ -3,8 +3,7 @@ import 'package:tv/domain/usecases/get_now_playing_tv.dart';
 import 'package:tv/presentation/bloc/now_playing_tv/now_playing_tv_event.dart';
 import 'package:tv/presentation/bloc/now_playing_tv/now_playing_tv_state.dart';
 
-class NowPlayingTVBloc
-    extends Bloc<NowPlayingTVEvent, NowPlayingTVState> {
+class NowPlayingTVBloc extends Bloc<NowPlayingTVEvent, NowPlayingTVState> {
   final GetNowPlayingTV getNowPlayingTV;
 
   NowPlayingTVBloc(this.getNowPlayingTV) : super(NowPlayingTVEmpty()) {

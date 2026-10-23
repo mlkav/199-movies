@@ -37,8 +37,7 @@ void main() {
 
   testWidgets('Page should display ListView and TVCard when data is loaded',
       (WidgetTester tester) async {
-    when(() => mockPopularTVBloc.state)
-        .thenReturn(PopularTVLoaded(testTVList));
+    when(() => mockPopularTVBloc.state).thenReturn(PopularTVLoaded(testTVList));
 
     await tester.pumpWidget(makeTestableWidget(const PopularTVPage()));
 

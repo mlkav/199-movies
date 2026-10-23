@@ -7,8 +7,7 @@ import 'package:movie/movie.dart';
 
 import '../../dummy_data/dummy_objects.dart';
 
-class MockMovieSearchBloc
-    extends MockBloc<MovieSearchEvent, MovieSearchState>
+class MockMovieSearchBloc extends MockBloc<MovieSearchEvent, MovieSearchState>
     implements MovieSearchBloc {}
 
 void main() {

@@ -48,7 +48,8 @@ void main() {
               const Scaffold(body: Text('Top Rated Movies')),
           MovieDetailPage.routeName: (_) =>
               const Scaffold(body: Text('Movie Detail')),
-          SearchPage.routeName: (_) => const Scaffold(body: Text('Search Page')),
+          SearchPage.routeName: (_) =>
+              const Scaffold(body: Text('Search Page')),
           WatchlistMoviesPage.routeName: (_) =>
               const Scaffold(body: Text('Watchlist Movies')),
           '/home-tv': (_) => const Scaffold(body: Text('Home TV')),

@@ -41,7 +41,8 @@ void main() {
 
     expect(const LoadMovieWatchlistStatus(1).props, [1]);
     expect(const AddMovieWatchlist(testMovieDetail).props, [testMovieDetail]);
-    expect(const RemoveMovieWatchlist(testMovieDetail).props, [testMovieDetail]);
+    expect(
+        const RemoveMovieWatchlist(testMovieDetail).props, [testMovieDetail]);
 
     expect(FetchWatchlistMovies().props, []);
     expect(WatchlistMovieEmpty().props, []);

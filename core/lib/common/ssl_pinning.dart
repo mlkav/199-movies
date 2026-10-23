@@ -15,7 +15,8 @@ class HttpSSLPinning {
       ByteData sslCert;
       try {
         sslCert = customCert ??
-            await rootBundle.load('packages/core/assets/certificates/certificates.pem');
+            await rootBundle
+                .load('packages/core/assets/certificates/certificates.pem');
       } catch (_) {
         sslCert = customCert ??
             await rootBundle.load('assets/certificates/certificates.pem');
@@ -26,7 +27,6 @@ class HttpSSLPinning {
 
       final httpClient = HttpClient(context: securityContext);
       return IOClient(httpClient);
-
     } catch (e) {
       throw Exception('Failed to initialize SSL Pinning client: $e');
     }

@@ -117,8 +117,10 @@ void main() {
 
       final result = await repository.getNowPlayingMovies();
 
-      expect(result,
-          equals(const Left(SSLFailure('SSL Certificate Verification Failed'))));
+      expect(
+          result,
+          equals(
+              const Left(SSLFailure('SSL Certificate Verification Failed'))));
     });
 
     test('should return SSL failure when TlsException occurs', () async {
@@ -127,8 +129,10 @@ void main() {
 
       final result = await repository.getNowPlayingMovies();
 
-      expect(result,
-          equals(const Left(SSLFailure('SSL Certificate Verification Failed'))));
+      expect(
+          result,
+          equals(
+              const Left(SSLFailure('SSL Certificate Verification Failed'))));
     });
 
     test('should return ServerFailure on unknown exception', () async {
@@ -170,8 +174,10 @@ void main() {
 
       final result = await repository.getPopularMovies();
 
-      expect(result,
-          equals(const Left(SSLFailure('SSL Certificate Verification Failed'))));
+      expect(
+          result,
+          equals(
+              const Left(SSLFailure('SSL Certificate Verification Failed'))));
     });
 
     test('should return ServerFailure on unknown exception', () async {
@@ -212,8 +218,10 @@ void main() {
 
       final result = await repository.getTopRatedMovies();
 
-      expect(result,
-          equals(const Left(SSLFailure('SSL Certificate Verification Failed'))));
+      expect(
+          result,
+          equals(
+              const Left(SSLFailure('SSL Certificate Verification Failed'))));
     });
 
     test('should return ServerFailure on unknown exception', () async {
@@ -282,8 +290,10 @@ void main() {
 
       final result = await repository.getMovieDetail(tId);
 
-      expect(result,
-          equals(const Left(SSLFailure('SSL Certificate Verification Failed'))));
+      expect(
+          result,
+          equals(
+              const Left(SSLFailure('SSL Certificate Verification Failed'))));
     });
 
     test('should return ServerFailure on unknown exception', () async {
@@ -326,8 +336,10 @@ void main() {
 
       final result = await repository.getMovieRecommendations(tId);
 
-      expect(result,
-          equals(const Left(SSLFailure('SSL Certificate Verification Failed'))));
+      expect(
+          result,
+          equals(
+              const Left(SSLFailure('SSL Certificate Verification Failed'))));
     });
 
     test('should return ServerFailure on unknown exception', () async {
@@ -370,8 +382,10 @@ void main() {
 
       final result = await repository.searchMovies(tQuery);
 
-      expect(result,
-          equals(const Left(SSLFailure('SSL Certificate Verification Failed'))));
+      expect(
+          result,
+          equals(
+              const Left(SSLFailure('SSL Certificate Verification Failed'))));
     });
 
     test('should return ServerFailure on unknown exception', () async {

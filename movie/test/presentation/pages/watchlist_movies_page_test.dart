@@ -29,7 +29,8 @@ void main() {
 
   testWidgets('Page should display progress bar when loading',
       (WidgetTester tester) async {
-    when(() => mockWatchlistMovieBloc.state).thenReturn(WatchlistMovieLoading());
+    when(() => mockWatchlistMovieBloc.state)
+        .thenReturn(WatchlistMovieLoading());
 
     await tester.pumpWidget(makeTestableWidget(const WatchlistMoviesPage()));
 

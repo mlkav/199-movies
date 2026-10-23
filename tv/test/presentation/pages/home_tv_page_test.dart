@@ -12,12 +12,10 @@ class MockNowPlayingTVBloc
     extends MockBloc<NowPlayingTVEvent, NowPlayingTVState>
     implements NowPlayingTVBloc {}
 
-class MockPopularTVBloc
-    extends MockBloc<PopularTVEvent, PopularTVState>
+class MockPopularTVBloc extends MockBloc<PopularTVEvent, PopularTVState>
     implements PopularTVBloc {}
 
-class MockTopRatedTVBloc
-    extends MockBloc<TopRatedTVEvent, TopRatedTVState>
+class MockTopRatedTVBloc extends MockBloc<TopRatedTVEvent, TopRatedTVState>
     implements TopRatedTVBloc {}
 
 void main() {
@@ -77,8 +75,7 @@ void main() {
       (WidgetTester tester) async {
     when(() => mockNowPlayingTVBloc.state)
         .thenReturn(NowPlayingTVLoaded(testTVList));
-    when(() => mockPopularTVBloc.state)
-        .thenReturn(PopularTVLoaded(testTVList));
+    when(() => mockPopularTVBloc.state).thenReturn(PopularTVLoaded(testTVList));
     when(() => mockTopRatedTVBloc.state)
         .thenReturn(TopRatedTVLoaded(testTVList));
 
@@ -111,8 +108,7 @@ void main() {
       (WidgetTester tester) async {
     when(() => mockNowPlayingTVBloc.state)
         .thenReturn(NowPlayingTVLoaded(testTVList));
-    when(() => mockPopularTVBloc.state)
-        .thenReturn(PopularTVLoaded(testTVList));
+    when(() => mockPopularTVBloc.state).thenReturn(PopularTVLoaded(testTVList));
     when(() => mockTopRatedTVBloc.state)
         .thenReturn(TopRatedTVLoaded(testTVList));
 
@@ -128,8 +124,7 @@ void main() {
       (WidgetTester tester) async {
     when(() => mockNowPlayingTVBloc.state)
         .thenReturn(NowPlayingTVLoaded(testTVList));
-    when(() => mockPopularTVBloc.state)
-        .thenReturn(PopularTVLoaded(testTVList));
+    when(() => mockPopularTVBloc.state).thenReturn(PopularTVLoaded(testTVList));
     when(() => mockTopRatedTVBloc.state)
         .thenReturn(TopRatedTVLoaded(testTVList));
 
@@ -145,8 +140,7 @@ void main() {
       (WidgetTester tester) async {
     when(() => mockNowPlayingTVBloc.state)
         .thenReturn(NowPlayingTVLoaded(testTVList));
-    when(() => mockPopularTVBloc.state)
-        .thenReturn(PopularTVLoaded(testTVList));
+    when(() => mockPopularTVBloc.state).thenReturn(PopularTVLoaded(testTVList));
     when(() => mockTopRatedTVBloc.state)
         .thenReturn(TopRatedTVLoaded(testTVList));
 

@@ -88,8 +88,7 @@ void main() {
     test(
         'should return server failure when the call to remote data source is unsuccessful',
         () async {
-      when(mockRemoteDataSource.getNowPlayingTV())
-          .thenThrow(ServerException());
+      when(mockRemoteDataSource.getNowPlayingTV()).thenThrow(ServerException());
 
       final result = await repository.getNowPlayingTV();
 
@@ -118,8 +117,10 @@ void main() {
 
       final result = await repository.getNowPlayingTV();
 
-      expect(result,
-          equals(const Left(SSLFailure('SSL Certificate Verification Failed'))));
+      expect(
+          result,
+          equals(
+              const Left(SSLFailure('SSL Certificate Verification Failed'))));
     });
 
     test('should return SSL failure when TlsException occurs', () async {
@@ -128,8 +129,10 @@ void main() {
 
       final result = await repository.getNowPlayingTV();
 
-      expect(result,
-          equals(const Left(SSLFailure('SSL Certificate Verification Failed'))));
+      expect(
+          result,
+          equals(
+              const Left(SSLFailure('SSL Certificate Verification Failed'))));
     });
 
     test('should return ServerFailure on unknown exception', () async {
@@ -156,8 +159,7 @@ void main() {
     test(
         'should return server failure when call to data source is unsuccessful',
         () async {
-      when(mockRemoteDataSource.getPopularTV())
-          .thenThrow(ServerException());
+      when(mockRemoteDataSource.getPopularTV()).thenThrow(ServerException());
 
       final result = await repository.getPopularTV();
 
@@ -170,8 +172,10 @@ void main() {
 
       final result = await repository.getPopularTV();
 
-      expect(result,
-          equals(const Left(SSLFailure('SSL Certificate Verification Failed'))));
+      expect(
+          result,
+          equals(
+              const Left(SSLFailure('SSL Certificate Verification Failed'))));
     });
 
     test('should return ServerFailure on unknown exception', () async {
@@ -198,8 +202,7 @@ void main() {
 
     test('should return ServerFailure when call to data source is unsuccessful',
         () async {
-      when(mockRemoteDataSource.getTopRatedTV())
-          .thenThrow(ServerException());
+      when(mockRemoteDataSource.getTopRatedTV()).thenThrow(ServerException());
 
       final result = await repository.getTopRatedTV();
 
@@ -212,8 +215,10 @@ void main() {
 
       final result = await repository.getTopRatedTV();
 
-      expect(result,
-          equals(const Left(SSLFailure('SSL Certificate Verification Failed'))));
+      expect(
+          result,
+          equals(
+              const Left(SSLFailure('SSL Certificate Verification Failed'))));
     });
 
     test('should return ServerFailure on unknown exception', () async {
@@ -270,8 +275,7 @@ void main() {
     test(
         'should return Server Failure when call to remote data source is unsuccessful',
         () async {
-      when(mockRemoteDataSource.getTVDetail(tId))
-          .thenThrow(ServerException());
+      when(mockRemoteDataSource.getTVDetail(tId)).thenThrow(ServerException());
 
       final result = await repository.getTVDetail(tId);
 
@@ -285,8 +289,10 @@ void main() {
 
       final result = await repository.getTVDetail(tId);
 
-      expect(result,
-          equals(const Left(SSLFailure('SSL Certificate Verification Failed'))));
+      expect(
+          result,
+          equals(
+              const Left(SSLFailure('SSL Certificate Verification Failed'))));
     });
 
     test('should return ServerFailure on unknown exception', () async {
@@ -362,8 +368,10 @@ void main() {
 
       final result = await repository.getTVRecommendations(tId);
 
-      expect(result,
-          equals(const Left(SSLFailure('SSL Certificate Verification Failed'))));
+      expect(
+          result,
+          equals(
+              const Left(SSLFailure('SSL Certificate Verification Failed'))));
     });
 
     test('should return ServerFailure on unknown exception', () async {
@@ -392,8 +400,7 @@ void main() {
 
     test('should return ServerFailure when call to data source is unsuccessful',
         () async {
-      when(mockRemoteDataSource.searchTV(tQuery))
-          .thenThrow(ServerException());
+      when(mockRemoteDataSource.searchTV(tQuery)).thenThrow(ServerException());
 
       final result = await repository.searchTV(tQuery);
 
@@ -406,8 +413,10 @@ void main() {
 
       final result = await repository.searchTV(tQuery);
 
-      expect(result,
-          equals(const Left(SSLFailure('SSL Certificate Verification Failed'))));
+      expect(
+          result,
+          equals(
+              const Left(SSLFailure('SSL Certificate Verification Failed'))));
     });
 
     test('should return ServerFailure on unknown exception', () async {

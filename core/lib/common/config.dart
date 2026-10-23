@@ -3,7 +3,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 class AppConfig {
   static String get apiKey {
     if (dotenv.isInitialized) {
-      return dotenv.env['API_KEY'] ?? 'api_key=2174d146bb9c0eab47529b2e77d6b526';
+      return dotenv.env['API_KEY'] ??
+          'api_key=2174d146bb9c0eab47529b2e77d6b526';
     }
     return 'api_key=2174d146bb9c0eab47529b2e77d6b526';
   }

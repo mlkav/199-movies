@@ -9,7 +9,8 @@ void main() {
     expect(HttpSSLPinning.client, isNotNull);
   });
 
-  test('HttpSSLPinning.createSSLPinningClient creates a client with valid cert', () async {
+  test('HttpSSLPinning.createSSLPinningClient creates a client with valid cert',
+      () async {
     const certString = '''
 -----BEGIN CERTIFICATE-----
 MIIF0zCCBLugAwIBAgIQA0dBqzkiSFlnc+jSrEfoYTANBgkqhkiG9w0BAQsFADA8
@@ -46,8 +47,10 @@ Toy6a6kE7nuXKZudVqPvTmxs6nyQoeUUeiz3yXwN6n0dkJ0C5MHs74LWg+XHrVTP
 +T9dv5ah+g==
 -----END CERTIFICATE-----
 ''';
-    final customData = ByteData.sublistView(Uint8List.fromList(certString.codeUnits));
-    final client = await HttpSSLPinning.createSSLPinningClient(customCert: customData);
+    final customData =
+        ByteData.sublistView(Uint8List.fromList(certString.codeUnits));
+    final client =
+        await HttpSSLPinning.createSSLPinningClient(customCert: customData);
     expect(client, isNotNull);
   });
 

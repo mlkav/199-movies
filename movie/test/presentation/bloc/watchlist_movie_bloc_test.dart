@@ -46,8 +46,8 @@ void main() {
   blocTest<WatchlistMovieBloc, WatchlistMovieState>(
     'Should emit [WatchlistMovieLoading, WatchlistMovieError] when get data is unsuccessful',
     build: () {
-      when(mockGetWatchlistMovies.execute())
-          .thenAnswer((_) async => const Left(DatabaseFailure('Can\'t get data')));
+      when(mockGetWatchlistMovies.execute()).thenAnswer(
+          (_) async => const Left(DatabaseFailure('Can\'t get data')));
       return watchlistMovieBloc;
     },
     act: (bloc) => bloc.add(FetchWatchlistMovies()),

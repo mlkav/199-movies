@@ -202,7 +202,8 @@ class DetailContent extends StatelessWidget {
                                   );
                                 } else if (state is MovieRecommendationsError) {
                                   return Text(state.message);
-                                } else if (state is MovieRecommendationsLoaded) {
+                                } else if (state
+                                    is MovieRecommendationsLoaded) {
                                   final recommendations = state.movies;
                                   return SizedBox(
                                     height: 150,
@@ -218,11 +219,13 @@ class DetailContent extends StatelessWidget {
                                               Navigator.pushReplacementNamed(
                                                 context,
                                                 MovieDetailPage.routeName,
-                                                arguments: movieRecommendation.id,
+                                                arguments:
+                                                    movieRecommendation.id,
                                               );
                                             },
                                             child: ClipRRect(
-                                              borderRadius: const BorderRadius.all(
+                                              borderRadius:
+                                                  const BorderRadius.all(
                                                 Radius.circular(8),
                                               ),
                                               child: CachedNetworkImage(

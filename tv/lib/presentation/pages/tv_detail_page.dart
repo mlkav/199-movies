@@ -233,7 +233,8 @@ class DetailContent extends StatelessWidget {
                                               );
                                             },
                                             child: ClipRRect(
-                                              borderRadius: const BorderRadius.all(
+                                              borderRadius:
+                                                  const BorderRadius.all(
                                                 Radius.circular(8),
                                               ),
                                               child: CachedNetworkImage(

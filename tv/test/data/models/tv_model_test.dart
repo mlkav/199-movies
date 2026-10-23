@@ -40,7 +40,8 @@ void main() {
     expect(result, tTV);
   });
 
-  test('should parse json correctly when genre_ids and origin_country are null', () {
+  test('should parse json correctly when genre_ids and origin_country are null',
+      () {
     final jsonMap = {
       'backdrop_path': '/path.jpg',
       'first_air_date': '2021-01-01',

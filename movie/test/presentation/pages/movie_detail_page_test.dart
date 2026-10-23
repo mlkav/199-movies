@@ -9,8 +9,7 @@ import 'package:movie/movie.dart';
 
 import '../../dummy_data/dummy_objects.dart';
 
-class MockMovieDetailBloc
-    extends MockBloc<MovieDetailEvent, MovieDetailState>
+class MockMovieDetailBloc extends MockBloc<MovieDetailEvent, MovieDetailState>
     implements MovieDetailBloc {}
 
 class MockMovieRecommendationsBloc
@@ -57,7 +56,8 @@ void main() {
     when(() => mockMovieRecommendationsBloc.state)
         .thenReturn(MovieRecommendationsLoading());
     when(() => mockMovieWatchlistStatusBloc.state).thenReturn(
-        const MovieWatchlistStatusState(isAddedToWatchlist: false, message: ''));
+        const MovieWatchlistStatusState(
+            isAddedToWatchlist: false, message: ''));
 
     await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
 
@@ -71,7 +71,8 @@ void main() {
     when(() => mockMovieRecommendationsBloc.state)
         .thenReturn(MovieRecommendationsLoading());
     when(() => mockMovieWatchlistStatusBloc.state).thenReturn(
-        const MovieWatchlistStatusState(isAddedToWatchlist: false, message: ''));
+        const MovieWatchlistStatusState(
+            isAddedToWatchlist: false, message: ''));
 
     await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
 
@@ -86,7 +87,8 @@ void main() {
     when(() => mockMovieRecommendationsBloc.state)
         .thenReturn(const MovieRecommendationsLoaded([]));
     when(() => mockMovieWatchlistStatusBloc.state).thenReturn(
-        const MovieWatchlistStatusState(isAddedToWatchlist: false, message: ''));
+        const MovieWatchlistStatusState(
+            isAddedToWatchlist: false, message: ''));
 
     final watchlistButtonIcon = find.byIcon(Icons.add);
 
@@ -120,7 +122,8 @@ void main() {
     when(() => mockMovieRecommendationsBloc.state)
         .thenReturn(const MovieRecommendationsLoaded([]));
     when(() => mockMovieWatchlistStatusBloc.state).thenReturn(
-        const MovieWatchlistStatusState(isAddedToWatchlist: false, message: ''));
+        const MovieWatchlistStatusState(
+            isAddedToWatchlist: false, message: ''));
 
     await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
 
@@ -150,10 +153,10 @@ void main() {
         .add(const RemoveMovieWatchlist(testMovieDetail))).called(1);
   });
 
-  testWidgets(
-      'Should display SnackBar when added to watchlist success',
+  testWidgets('Should display SnackBar when added to watchlist success',
       (WidgetTester tester) async {
-    final streamController = StreamController<MovieWatchlistStatusState>.broadcast();
+    final streamController =
+        StreamController<MovieWatchlistStatusState>.broadcast();
     when(() => mockMovieWatchlistStatusBloc.stream)
         .thenAnswer((_) => streamController.stream);
     when(() => mockMovieDetailBloc.state)
@@ -161,7 +164,8 @@ void main() {
     when(() => mockMovieRecommendationsBloc.state)
         .thenReturn(const MovieRecommendationsLoaded([]));
     when(() => mockMovieWatchlistStatusBloc.state).thenReturn(
-        const MovieWatchlistStatusState(isAddedToWatchlist: false, message: ''));
+        const MovieWatchlistStatusState(
+            isAddedToWatchlist: false, message: ''));
 
     await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
 
@@ -175,10 +179,10 @@ void main() {
     await streamController.close();
   });
 
-  testWidgets(
-      'Should display AlertDialog when watchlist operation fails',
+  testWidgets('Should display AlertDialog when watchlist operation fails',
       (WidgetTester tester) async {
-    final streamController = StreamController<MovieWatchlistStatusState>.broadcast();
+    final streamController =
+        StreamController<MovieWatchlistStatusState>.broadcast();
     when(() => mockMovieWatchlistStatusBloc.stream)
         .thenAnswer((_) => streamController.stream);
     when(() => mockMovieDetailBloc.state)
@@ -186,7 +190,8 @@ void main() {
     when(() => mockMovieRecommendationsBloc.state)
         .thenReturn(const MovieRecommendationsLoaded([]));
     when(() => mockMovieWatchlistStatusBloc.state).thenReturn(
-        const MovieWatchlistStatusState(isAddedToWatchlist: false, message: ''));
+        const MovieWatchlistStatusState(
+            isAddedToWatchlist: false, message: ''));
 
     await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
 
@@ -208,7 +213,8 @@ void main() {
     when(() => mockMovieRecommendationsBloc.state)
         .thenReturn(const MovieRecommendationsError('Rec error'));
     when(() => mockMovieWatchlistStatusBloc.state).thenReturn(
-        const MovieWatchlistStatusState(isAddedToWatchlist: false, message: ''));
+        const MovieWatchlistStatusState(
+            isAddedToWatchlist: false, message: ''));
 
     await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
 
@@ -223,15 +229,18 @@ void main() {
     when(() => mockMovieRecommendationsBloc.state)
         .thenReturn(MovieRecommendationsLoaded(testMovieList));
     when(() => mockMovieWatchlistStatusBloc.state).thenReturn(
-        const MovieWatchlistStatusState(isAddedToWatchlist: false, message: ''));
+        const MovieWatchlistStatusState(
+            isAddedToWatchlist: false, message: ''));
 
     await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
 
     final recommendationInkWell = tester.widget<InkWell>(
-      find.descendant(
-        of: find.byType(ListView),
-        matching: find.byType(InkWell),
-      ).first,
+      find
+          .descendant(
+            of: find.byType(ListView),
+            matching: find.byType(InkWell),
+          )
+          .first,
     );
     recommendationInkWell.onTap!();
     await tester.pumpAndSettle();
@@ -246,7 +255,8 @@ void main() {
     when(() => mockMovieRecommendationsBloc.state)
         .thenReturn(const MovieRecommendationsLoaded([]));
     when(() => mockMovieWatchlistStatusBloc.state).thenReturn(
-        const MovieWatchlistStatusState(isAddedToWatchlist: false, message: ''));
+        const MovieWatchlistStatusState(
+            isAddedToWatchlist: false, message: ''));
 
     await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
 

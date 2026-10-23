@@ -7,7 +7,9 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('End-to-End App Integration Test', () {
-    testWidgets('Should load home page, switch to TV series, search, and open detail', (WidgetTester tester) async {
+    testWidgets(
+        'Should load home page, switch to TV series, search, and open detail',
+        (WidgetTester tester) async {
       // Menjalankan aplikasi utama
       app.main();
       await tester.pump();

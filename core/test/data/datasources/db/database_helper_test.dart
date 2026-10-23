@@ -36,7 +36,9 @@ void main() {
     expect(db, equals(mockDatabase));
   });
 
-  test('_initDb and _onCreate should initialize and execute table creation SQL statements', () async {
+  test(
+      '_initDb and _onCreate should initialize and execute table creation SQL statements',
+      () async {
     DatabaseHelper.testDatabase = null;
     DatabaseHelper.getDatabasesPathFunction = () async => '/test/path';
     DatabaseHelper.openDatabaseFunction = (path, {version, onCreate}) async {

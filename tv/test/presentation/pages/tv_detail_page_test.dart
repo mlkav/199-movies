@@ -45,8 +45,7 @@ void main() {
             value: mockTVRecommendationsBloc),
         BlocProvider<TVWatchlistStatusBloc>.value(
             value: mockTVWatchlistStatusBloc),
-        BlocProvider<TVSeasonDetailBloc>.value(
-            value: mockTVSeasonDetailBloc),
+        BlocProvider<TVSeasonDetailBloc>.value(value: mockTVSeasonDetailBloc),
       ],
       child: MaterialApp(
         home: body,
@@ -134,8 +133,9 @@ void main() {
     final watchlistButton = find.byType(FilledButton);
     await tester.tap(watchlistButton);
 
-    verify(() => mockTVWatchlistStatusBloc
-        .add(const AddTVWatchlist(testTVDetail))).called(1);
+    verify(() =>
+            mockTVWatchlistStatusBloc.add(const AddTVWatchlist(testTVDetail)))
+        .called(1);
   });
 
   testWidgets(
@@ -157,10 +157,10 @@ void main() {
         .add(const RemoveTVWatchlist(testTVDetail))).called(1);
   });
 
-  testWidgets(
-      'Should display SnackBar when added to watchlist success',
+  testWidgets('Should display SnackBar when added to watchlist success',
       (WidgetTester tester) async {
-    final streamController = StreamController<TVWatchlistStatusState>.broadcast();
+    final streamController =
+        StreamController<TVWatchlistStatusState>.broadcast();
     when(() => mockTVWatchlistStatusBloc.stream)
         .thenAnswer((_) => streamController.stream);
     when(() => mockTVDetailBloc.state)
@@ -182,10 +182,10 @@ void main() {
     await streamController.close();
   });
 
-  testWidgets(
-      'Should display AlertDialog when watchlist operation fails',
+  testWidgets('Should display AlertDialog when watchlist operation fails',
       (WidgetTester tester) async {
-    final streamController = StreamController<TVWatchlistStatusState>.broadcast();
+    final streamController =
+        StreamController<TVWatchlistStatusState>.broadcast();
     when(() => mockTVWatchlistStatusBloc.stream)
         .thenAnswer((_) => streamController.stream);
     when(() => mockTVDetailBloc.state)
@@ -283,10 +283,12 @@ void main() {
     await tester.pumpWidget(makeTestableWidget(const TVDetailPage(id: 1)));
 
     final recommendationInkWell = tester.widget<InkWell>(
-      find.descendant(
-        of: find.byType(ListView).last,
-        matching: find.byType(InkWell),
-      ).first,
+      find
+          .descendant(
+            of: find.byType(ListView).last,
+            matching: find.byType(InkWell),
+          )
+          .first,
     );
     recommendationInkWell.onTap!();
     await tester.pumpAndSettle();

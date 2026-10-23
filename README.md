@@ -26,9 +26,3 @@ flutter run
 4. **Firebase Analytics & Crashlytics**: Memantau statistik penggunaan dan pelaporan error secara real-time.
 5. **Continuous Integration (CI)**: CI Workflow GitHub Actions menjalankan pengujian otomatis & verifikasi test coverage (>95%).
 6. **Informasi Season & Episode**: Menampilkan daftar season dan jumlah episode secara detail pada halaman detail TV Series.
-
-## Menjalankan Testing
-Untuk menjalankan seluruh unit dan widget test beserta penggabungan laporan coverage:
-```bash
-./test.sh
-```

@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:core/common/analytics_service.dart';
 import 'package:core/common/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,21 +15,29 @@ import 'package:movie/presentation/bloc/movie_watchlist_status/movie_watchlist_s
 import '../../dummy_data/dummy_objects.dart';
 import 'movie_watchlist_status_bloc_test.mocks.dart';
 
-@GenerateMocks([GetWatchListStatus, SaveWatchlist, RemoveWatchlist])
+@GenerateMocks([
+  GetWatchListStatus,
+  SaveWatchlist,
+  RemoveWatchlist,
+  AnalyticsService,
+])
 void main() {
   late MovieWatchlistStatusBloc movieWatchlistStatusBloc;
   late MockGetWatchListStatus mockGetWatchListStatus;
   late MockSaveWatchlist mockSaveWatchlist;
   late MockRemoveWatchlist mockRemoveWatchlist;
+  late MockAnalyticsService mockAnalyticsService;
 
   setUp(() {
     mockGetWatchListStatus = MockGetWatchListStatus();
     mockSaveWatchlist = MockSaveWatchlist();
     mockRemoveWatchlist = MockRemoveWatchlist();
+    mockAnalyticsService = MockAnalyticsService();
     movieWatchlistStatusBloc = MovieWatchlistStatusBloc(
       getWatchListStatus: mockGetWatchListStatus,
       saveWatchlist: mockSaveWatchlist,
       removeWatchlist: mockRemoveWatchlist,
+      analyticsService: mockAnalyticsService,
     );
   });
 
@@ -57,6 +66,11 @@ void main() {
           .thenAnswer((_) async => const Right('Added to Watchlist'));
       when(mockGetWatchListStatus.execute(testMovieDetail.id))
           .thenAnswer((_) async => true);
+      when(mockAnalyticsService.logAddToWatchlist(
+        contentType: 'movie',
+        itemId: testMovieDetail.id.toString(),
+        title: testMovieDetail.title,
+      )).thenAnswer((_) async {});
       return movieWatchlistStatusBloc;
     },
     act: (bloc) => bloc.add(const AddMovieWatchlist(testMovieDetail)),
@@ -64,6 +78,13 @@ void main() {
       const MovieWatchlistStatusState(
           isAddedToWatchlist: true, message: 'Added to Watchlist'),
     ],
+    verify: (bloc) {
+      verify(mockAnalyticsService.logAddToWatchlist(
+        contentType: 'movie',
+        itemId: testMovieDetail.id.toString(),
+        title: testMovieDetail.title,
+      ));
+    },
   );
 
   blocTest<MovieWatchlistStatusBloc, MovieWatchlistStatusState>(
@@ -87,6 +108,11 @@ void main() {
           .thenAnswer((_) async => const Right('Removed from Watchlist'));
       when(mockGetWatchListStatus.execute(testMovieDetail.id))
           .thenAnswer((_) async => false);
+      when(mockAnalyticsService.logRemoveFromWatchlist(
+        contentType: 'movie',
+        itemId: testMovieDetail.id.toString(),
+        title: testMovieDetail.title,
+      )).thenAnswer((_) async {});
       return movieWatchlistStatusBloc;
     },
     act: (bloc) => bloc.add(const RemoveMovieWatchlist(testMovieDetail)),
@@ -94,6 +120,13 @@ void main() {
       const MovieWatchlistStatusState(
           isAddedToWatchlist: false, message: 'Removed from Watchlist'),
     ],
+    verify: (bloc) {
+      verify(mockAnalyticsService.logRemoveFromWatchlist(
+        contentType: 'movie',
+        itemId: testMovieDetail.id.toString(),
+        title: testMovieDetail.title,
+      ));
+    },
   );
 
   blocTest<MovieWatchlistStatusBloc, MovieWatchlistStatusState>(

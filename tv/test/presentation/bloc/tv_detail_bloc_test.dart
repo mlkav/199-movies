@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:core/common/analytics_service.dart';
 import 'package:core/common/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,14 +13,19 @@ import 'package:tv/presentation/bloc/tv_detail/tv_detail_state.dart';
 import '../../dummy_data/dummy_objects.dart';
 import 'tv_detail_bloc_test.mocks.dart';
 
-@GenerateMocks([GetTVDetail])
+@GenerateMocks([GetTVDetail, AnalyticsService])
 void main() {
   late TVDetailBloc tvDetailBloc;
   late MockGetTVDetail mockGetTVDetail;
+  late MockAnalyticsService mockAnalyticsService;
 
   setUp(() {
     mockGetTVDetail = MockGetTVDetail();
-    tvDetailBloc = TVDetailBloc(mockGetTVDetail);
+    mockAnalyticsService = MockAnalyticsService();
+    tvDetailBloc = TVDetailBloc(
+      mockGetTVDetail,
+      analyticsService: mockAnalyticsService,
+    );
   });
 
   const tId = 1;
@@ -33,6 +39,11 @@ void main() {
     build: () {
       when(mockGetTVDetail.execute(tId))
           .thenAnswer((_) async => Right(testTVDetail));
+      when(mockAnalyticsService.logSelectContent(
+        contentType: 'tv',
+        itemId: testTVDetail.id.toString(),
+        title: testTVDetail.name,
+      )).thenAnswer((_) async {});
       return tvDetailBloc;
     },
     act: (bloc) => bloc.add(const FetchTVDetail(tId)),
@@ -42,6 +53,11 @@ void main() {
     ],
     verify: (bloc) {
       verify(mockGetTVDetail.execute(tId));
+      verify(mockAnalyticsService.logSelectContent(
+        contentType: 'tv',
+        itemId: testTVDetail.id.toString(),
+        title: testTVDetail.name,
+      ));
     },
   );
 

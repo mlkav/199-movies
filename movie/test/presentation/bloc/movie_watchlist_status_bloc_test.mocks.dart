@@ -6,6 +6,7 @@
 
 import 'dart:async' as _i5;
 
+import 'package:core/common/analytics_service.dart' as _i10;
 import 'package:core/common/failure.dart' as _i7;
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
@@ -148,4 +149,101 @@ class MockRemoveWatchlist extends _i1.Mock implements _i9.RemoveWatchlist {
           ),
         )),
       ) as _i5.Future<_i3.Either<_i7.Failure, String>>);
+}
+
+/// A class which mocks [AnalyticsService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAnalyticsService extends _i1.Mock implements _i10.AnalyticsService {
+  MockAnalyticsService() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<void> logAppOpen() => (super.noSuchMethod(
+        Invocation.method(
+          #logAppOpen,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<void> logSearch({
+    required String? searchTerm,
+    required String? category,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logSearch,
+          [],
+          {
+            #searchTerm: searchTerm,
+            #category: category,
+          },
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<void> logSelectContent({
+    required String? contentType,
+    required String? itemId,
+    required String? title,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logSelectContent,
+          [],
+          {
+            #contentType: contentType,
+            #itemId: itemId,
+            #title: title,
+          },
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<void> logAddToWatchlist({
+    required String? contentType,
+    required String? itemId,
+    required String? title,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logAddToWatchlist,
+          [],
+          {
+            #contentType: contentType,
+            #itemId: itemId,
+            #title: title,
+          },
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<void> logRemoveFromWatchlist({
+    required String? contentType,
+    required String? itemId,
+    required String? title,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logRemoveFromWatchlist,
+          [],
+          {
+            #contentType: contentType,
+            #itemId: itemId,
+            #title: title,
+          },
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 }

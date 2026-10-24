@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:core/common/analytics_service.dart';
 import 'package:core/common/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,21 +15,29 @@ import 'package:tv/presentation/bloc/tv_watchlist_status/tv_watchlist_status_sta
 import '../../dummy_data/dummy_objects.dart';
 import 'tv_watchlist_status_bloc_test.mocks.dart';
 
-@GenerateMocks([GetWatchListTVStatus, SaveWatchlistTV, RemoveWatchlistTV])
+@GenerateMocks([
+  GetWatchListTVStatus,
+  SaveWatchlistTV,
+  RemoveWatchlistTV,
+  AnalyticsService,
+])
 void main() {
   late TVWatchlistStatusBloc tvWatchlistStatusBloc;
   late MockGetWatchListTVStatus mockGetWatchListTVStatus;
   late MockSaveWatchlistTV mockSaveWatchlistTV;
   late MockRemoveWatchlistTV mockRemoveWatchlistTV;
+  late MockAnalyticsService mockAnalyticsService;
 
   setUp(() {
     mockGetWatchListTVStatus = MockGetWatchListTVStatus();
     mockSaveWatchlistTV = MockSaveWatchlistTV();
     mockRemoveWatchlistTV = MockRemoveWatchlistTV();
+    mockAnalyticsService = MockAnalyticsService();
     tvWatchlistStatusBloc = TVWatchlistStatusBloc(
       getWatchListTVStatus: mockGetWatchListTVStatus,
       saveWatchlistTV: mockSaveWatchlistTV,
       removeWatchlistTV: mockRemoveWatchlistTV,
+      analyticsService: mockAnalyticsService,
     );
   });
 
@@ -57,6 +66,11 @@ void main() {
           .thenAnswer((_) async => const Right('Added to Watchlist'));
       when(mockGetWatchListTVStatus.execute(testTVDetail.id))
           .thenAnswer((_) async => true);
+      when(mockAnalyticsService.logAddToWatchlist(
+        contentType: 'tv',
+        itemId: testTVDetail.id.toString(),
+        title: testTVDetail.name,
+      )).thenAnswer((_) async {});
       return tvWatchlistStatusBloc;
     },
     act: (bloc) => bloc.add(const AddTVWatchlist(testTVDetail)),
@@ -64,6 +78,13 @@ void main() {
       const TVWatchlistStatusState(
           isAddedToWatchlist: true, message: 'Added to Watchlist'),
     ],
+    verify: (bloc) {
+      verify(mockAnalyticsService.logAddToWatchlist(
+        contentType: 'tv',
+        itemId: testTVDetail.id.toString(),
+        title: testTVDetail.name,
+      ));
+    },
   );
 
   blocTest<TVWatchlistStatusBloc, TVWatchlistStatusState>(
@@ -87,6 +108,11 @@ void main() {
           .thenAnswer((_) async => const Right('Removed from Watchlist'));
       when(mockGetWatchListTVStatus.execute(testTVDetail.id))
           .thenAnswer((_) async => false);
+      when(mockAnalyticsService.logRemoveFromWatchlist(
+        contentType: 'tv',
+        itemId: testTVDetail.id.toString(),
+        title: testTVDetail.name,
+      )).thenAnswer((_) async {});
       return tvWatchlistStatusBloc;
     },
     act: (bloc) => bloc.add(const RemoveTVWatchlist(testTVDetail)),
@@ -94,6 +120,13 @@ void main() {
       const TVWatchlistStatusState(
           isAddedToWatchlist: false, message: 'Removed from Watchlist'),
     ],
+    verify: (bloc) {
+      verify(mockAnalyticsService.logRemoveFromWatchlist(
+        contentType: 'tv',
+        itemId: testTVDetail.id.toString(),
+        title: testTVDetail.name,
+      ));
+    },
   );
 
   blocTest<TVWatchlistStatusBloc, TVWatchlistStatusState>(

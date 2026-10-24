@@ -21,7 +21,7 @@ void main() {
   group('save watchlist', () {
     test('should return success message when insert to database is success',
         () async {
-      when(mockDatabaseHelper.insertWatchlistTv(testTVTable.toJson()))
+      when(mockDatabaseHelper.insertWatchlistTV(testTVTable.toJson()))
           .thenAnswer((_) async => 1);
 
       final result = await dataSource.insertWatchlist(testTVTable);
@@ -31,7 +31,7 @@ void main() {
 
     test('should throw DatabaseException when insert to database fails',
         () async {
-      when(mockDatabaseHelper.insertWatchlistTv(testTVTable.toJson()))
+      when(mockDatabaseHelper.insertWatchlistTV(testTVTable.toJson()))
           .thenThrow(Exception());
 
       final call = dataSource.insertWatchlist(testTVTable);
@@ -43,7 +43,7 @@ void main() {
   group('remove watchlist', () {
     test('should return success message when remove from database is success',
         () async {
-      when(mockDatabaseHelper.removeWatchlistTv(testTVTable.id))
+      when(mockDatabaseHelper.removeWatchlistTV(testTVTable.id))
           .thenAnswer((_) async => 1);
 
       final result = await dataSource.removeWatchlist(testTVTable);
@@ -53,7 +53,7 @@ void main() {
 
     test('should throw DatabaseException when remove from database fails',
         () async {
-      when(mockDatabaseHelper.removeWatchlistTv(testTVTable.id))
+      when(mockDatabaseHelper.removeWatchlistTV(testTVTable.id))
           .thenThrow(Exception());
 
       final call = dataSource.removeWatchlist(testTVTable);
@@ -66,7 +66,7 @@ void main() {
     const tId = 1;
 
     test('should return TV Detail Table when data is found', () async {
-      when(mockDatabaseHelper.getTvById(tId))
+      when(mockDatabaseHelper.getTVById(tId))
           .thenAnswer((_) async => testTVMap);
 
       final result = await dataSource.getTVById(tId);
@@ -75,7 +75,7 @@ void main() {
     });
 
     test('should return null when data is not found', () async {
-      when(mockDatabaseHelper.getTvById(tId)).thenAnswer((_) async => null);
+      when(mockDatabaseHelper.getTVById(tId)).thenAnswer((_) async => null);
 
       final result = await dataSource.getTVById(tId);
 
@@ -85,7 +85,7 @@ void main() {
 
   group('get watchlist TV', () {
     test('should return list of TVTable from database', () async {
-      when(mockDatabaseHelper.getWatchlistTv())
+      when(mockDatabaseHelper.getWatchlistTV())
           .thenAnswer((_) async => [testTVMap]);
 
       final result = await dataSource.getWatchlistTV();

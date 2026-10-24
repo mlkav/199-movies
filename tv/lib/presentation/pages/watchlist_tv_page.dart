@@ -51,6 +51,34 @@ class WatchlistTVPageState extends State<WatchlistTVPage> with RouteAware {
                 child: CircularProgressIndicator(),
               );
             } else if (state is WatchlistTVLoaded) {
+              if (state.tvList.isEmpty) {
+                return const Center(
+                  key: Key('empty_watchlist'),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.bookmark_border,
+                        size: 64,
+                        color: Colors.grey,
+                      ),
+                      SizedBox(height: 16),
+                      Text(
+                        'Watchlist is still empty',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        'Add your favorite TV series to your watchlist.',
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                );
+              }
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final tv = state.tvList[index];

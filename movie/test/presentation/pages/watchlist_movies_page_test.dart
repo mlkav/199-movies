@@ -48,6 +48,17 @@ void main() {
     expect(find.byType(MovieCard), findsOneWidget);
   });
 
+  testWidgets('Page should display empty watchlist message when list is empty',
+      (WidgetTester tester) async {
+    when(() => mockWatchlistMovieBloc.state)
+        .thenReturn(const WatchlistMovieLoaded([]));
+
+    await tester.pumpWidget(makeTestableWidget(const WatchlistMoviesPage()));
+
+    expect(find.byKey(const Key('empty_watchlist')), findsOneWidget);
+    expect(find.text('Watchlist is still empty'), findsOneWidget);
+  });
+
   testWidgets('Page should display text with message when error',
       (WidgetTester tester) async {
     when(() => mockWatchlistMovieBloc.state)

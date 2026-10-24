@@ -41,11 +41,11 @@ class MockDatabaseHelper extends _i1.Mock implements _i2.DatabaseHelper {
       ) as _i3.Future<_i4.Database?>);
 
   @override
-  _i3.Future<int> insertWatchlist(Map<String, dynamic>? movieJson) =>
+  _i3.Future<int> insertWatchlist(Map<String, dynamic>? movie) =>
       (super.noSuchMethod(
         Invocation.method(
           #insertWatchlist,
-          [movieJson],
+          [movie],
         ),
         returnValue: _i3.Future<int>.value(0),
       ) as _i3.Future<int>);
@@ -81,38 +81,38 @@ class MockDatabaseHelper extends _i1.Mock implements _i2.DatabaseHelper {
       ) as _i3.Future<List<Map<String, dynamic>>>);
 
   @override
-  _i3.Future<int> insertWatchlistTv(Map<String, dynamic>? tvJson) =>
+  _i3.Future<int> insertWatchlistTV(Map<String, dynamic>? tvJson) =>
       (super.noSuchMethod(
         Invocation.method(
-          #insertWatchlistTv,
+          #insertWatchlistTV,
           [tvJson],
         ),
         returnValue: _i3.Future<int>.value(0),
       ) as _i3.Future<int>);
 
   @override
-  _i3.Future<int> removeWatchlistTv(int? id) => (super.noSuchMethod(
+  _i3.Future<int> removeWatchlistTV(int? id) => (super.noSuchMethod(
         Invocation.method(
-          #removeWatchlistTv,
+          #removeWatchlistTV,
           [id],
         ),
         returnValue: _i3.Future<int>.value(0),
       ) as _i3.Future<int>);
 
   @override
-  _i3.Future<Map<String, dynamic>?> getTvById(int? id) => (super.noSuchMethod(
+  _i3.Future<Map<String, dynamic>?> getTVById(int? id) => (super.noSuchMethod(
         Invocation.method(
-          #getTvById,
+          #getTVById,
           [id],
         ),
         returnValue: _i3.Future<Map<String, dynamic>?>.value(),
       ) as _i3.Future<Map<String, dynamic>?>);
 
   @override
-  _i3.Future<List<Map<String, dynamic>>> getWatchlistTv() =>
+  _i3.Future<List<Map<String, dynamic>>> getWatchlistTV() =>
       (super.noSuchMethod(
         Invocation.method(
-          #getWatchlistTv,
+          #getWatchlistTV,
           [],
         ),
         returnValue: _i3.Future<List<Map<String, dynamic>>>.value(

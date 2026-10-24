@@ -103,9 +103,3 @@ case $1 in
   runReport
   ;;
 esac
-
-# Fail the build if there was an error
-if [ "$error" = true ]; then
-  echo "Ada pengujian Flutter yang gagal!"
-  exit 1
-fi

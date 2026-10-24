@@ -1,3 +1,4 @@
+import 'package:core/common/analytics_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv/domain/usecases/get_watchlist_tv_status.dart';
 import 'package:tv/domain/usecases/remove_watchlist_tv.dart';
@@ -7,18 +8,23 @@ import 'package:tv/presentation/bloc/tv_watchlist_status/tv_watchlist_status_sta
 
 class TVWatchlistStatusBloc
     extends Bloc<TVWatchlistStatusEvent, TVWatchlistStatusState> {
-  static const watchlistAddSuccessMessage = 'Added to Watchlist';
-  static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
-
   final GetWatchListTVStatus getWatchListTVStatus;
   final SaveWatchlistTV saveWatchlistTV;
   final RemoveWatchlistTV removeWatchlistTV;
+  final AnalyticsService? analyticsService;
+
+  static const watchlistAddSuccessMessage = 'Added to Watchlist';
+  static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
 
   TVWatchlistStatusBloc({
     required this.getWatchListTVStatus,
     required this.saveWatchlistTV,
     required this.removeWatchlistTV,
-  }) : super(TVWatchlistStatusState.initial()) {
+    this.analyticsService,
+  }) : super(const TVWatchlistStatusState(
+          isAddedToWatchlist: false,
+          message: '',
+        )) {
     on<LoadTVWatchlistStatus>((event, emit) async {
       final status = await getWatchListTVStatus.execute(event.id);
       emit(state.copyWith(isAddedToWatchlist: status, message: ''));
@@ -36,6 +42,11 @@ class TVWatchlistStatusBloc
             isAddedToWatchlist: status,
             message: successMessage,
           ));
+          analyticsService?.logAddToWatchlist(
+            contentType: 'tv',
+            itemId: event.tv.id.toString(),
+            title: event.tv.name,
+          );
         },
       );
     });
@@ -52,6 +63,11 @@ class TVWatchlistStatusBloc
             isAddedToWatchlist: status,
             message: successMessage,
           ));
+          analyticsService?.logRemoveFromWatchlist(
+            contentType: 'tv',
+            itemId: event.tv.id.toString(),
+            title: event.tv.name,
+          );
         },
       );
     });

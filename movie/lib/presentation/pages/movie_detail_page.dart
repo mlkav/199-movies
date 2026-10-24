@@ -19,7 +19,7 @@ class MovieDetailPage extends StatefulWidget {
   static const routeName = '/detail';
 
   final int id;
-  const MovieDetailPage({Key? key, required this.id}) : super(key: key);
+  const MovieDetailPage({super.key, required this.id});
 
   @override
   MovieDetailPageState createState() => MovieDetailPageState();
@@ -71,7 +71,7 @@ class MovieDetailPageState extends State<MovieDetailPage> {
 class DetailContent extends StatelessWidget {
   final MovieDetail movie;
 
-  const DetailContent(this.movie, {Key? key}) : super(key: key);
+  const DetailContent(this.movie, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -94,10 +94,9 @@ class _MoviePosterBackground extends StatelessWidget {
   final double screenWidth;
 
   const _MoviePosterBackground({
-    Key? key,
     required this.posterPath,
     required this.screenWidth,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +112,7 @@ class _MoviePosterBackground extends StatelessWidget {
 }
 
 class _BackButton extends StatelessWidget {
-  const _BackButton({Key? key}) : super(key: key);
+  const _BackButton();
 
   @override
   Widget build(BuildContext context) {
@@ -136,8 +135,7 @@ class _BackButton extends StatelessWidget {
 class _DraggableDetailSheet extends StatelessWidget {
   final MovieDetail movie;
 
-  const _DraggableDetailSheet({Key? key, required this.movie})
-      : super(key: key);
+  const _DraggableDetailSheet({required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -181,7 +179,7 @@ class _DraggableDetailSheet extends StatelessWidget {
 class _MovieSheetContent extends StatelessWidget {
   final MovieDetail movie;
 
-  const _MovieSheetContent({Key? key, required this.movie}) : super(key: key);
+  const _MovieSheetContent({required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -226,7 +224,7 @@ class _MovieSheetContent extends StatelessWidget {
 class _WatchlistButton extends StatelessWidget {
   final MovieDetail movie;
 
-  const _WatchlistButton({Key? key, required this.movie}) : super(key: key);
+  const _WatchlistButton({required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -279,8 +277,7 @@ class _WatchlistButton extends StatelessWidget {
 class _MovieRatingBar extends StatelessWidget {
   final double voteAverage;
 
-  const _MovieRatingBar({Key? key, required this.voteAverage})
-      : super(key: key);
+  const _MovieRatingBar({required this.voteAverage});
 
   @override
   Widget build(BuildContext context) {
@@ -302,7 +299,7 @@ class _MovieRatingBar extends StatelessWidget {
 }
 
 class _MovieRecommendationsList extends StatelessWidget {
-  const _MovieRecommendationsList({Key? key}) : super(key: key);
+  const _MovieRecommendationsList();
 
   @override
   Widget build(BuildContext context) {

@@ -51,7 +51,7 @@ void main() {
           SearchPage.routeName: (_) =>
               const Scaffold(body: Text('Search Page')),
           WatchlistMoviesPage.routeName: (_) =>
-              const Scaffold(body: Text('Watchlist Movies')),
+              const Scaffold(body: Text('Watchlist Movies Page')),
           '/home-tv': (_) => const Scaffold(body: Text('Home TV')),
           '/watchlist-tv': (_) => const Scaffold(body: Text('Watchlist TV')),
           '/about': (_) => const Scaffold(body: Text('About Page')),
@@ -176,7 +176,7 @@ void main() {
     expect(find.text('Movie Detail'), findsOneWidget);
   });
 
-  testWidgets('Should open drawer and navigate to options when tapped',
+  testWidgets('Should open drawer and tap TV Series',
       (WidgetTester tester) async {
     when(() => mockNowPlayingMoviesBloc.state)
         .thenReturn(NowPlayingMoviesLoaded(testMovieList));
@@ -187,20 +187,79 @@ void main() {
 
     await tester.pumpWidget(makeTestableWidget(const HomeMoviePage()));
 
-    await tester.tap(find.byIcon(Icons.menu));
+    tester.state<ScaffoldState>(find.byType(Scaffold).first).openDrawer();
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
 
-    expect(find.text('Movies'), findsOneWidget);
-    expect(find.text('TV Series'), findsOneWidget);
-    expect(find.text('Watchlist Movies'), findsOneWidget);
-    expect(find.text('Watchlist TV Series'), findsOneWidget);
-    expect(find.text('About'), findsOneWidget);
-
-    await tester.tap(find.text('TV Series'));
+    await tester.tap(find.widgetWithText(ListTile, 'TV Series'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
 
     expect(find.text('Home TV'), findsOneWidget);
+  });
+
+  testWidgets('Should open drawer and tap Watchlist Movies',
+      (WidgetTester tester) async {
+    when(() => mockNowPlayingMoviesBloc.state)
+        .thenReturn(NowPlayingMoviesLoaded(testMovieList));
+    when(() => mockPopularMoviesBloc.state)
+        .thenReturn(PopularMoviesLoaded(testMovieList));
+    when(() => mockTopRatedMoviesBloc.state)
+        .thenReturn(TopRatedMoviesLoaded(testMovieList));
+
+    await tester.pumpWidget(makeTestableWidget(const HomeMoviePage()));
+
+    tester.state<ScaffoldState>(find.byType(Scaffold).first).openDrawer();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    await tester.tap(find.widgetWithText(ListTile, 'Watchlist Movies'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.text('Watchlist Movies Page'), findsOneWidget);
+  });
+
+  testWidgets('Should open drawer and tap Watchlist TV Series',
+      (WidgetTester tester) async {
+    when(() => mockNowPlayingMoviesBloc.state)
+        .thenReturn(NowPlayingMoviesLoaded(testMovieList));
+    when(() => mockPopularMoviesBloc.state)
+        .thenReturn(PopularMoviesLoaded(testMovieList));
+    when(() => mockTopRatedMoviesBloc.state)
+        .thenReturn(TopRatedMoviesLoaded(testMovieList));
+
+    await tester.pumpWidget(makeTestableWidget(const HomeMoviePage()));
+
+    tester.state<ScaffoldState>(find.byType(Scaffold).first).openDrawer();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    await tester.tap(find.widgetWithText(ListTile, 'Watchlist TV Series'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.text('Watchlist TV'), findsOneWidget);
+  });
+
+  testWidgets('Should open drawer and tap About', (WidgetTester tester) async {
+    when(() => mockNowPlayingMoviesBloc.state)
+        .thenReturn(NowPlayingMoviesLoaded(testMovieList));
+    when(() => mockPopularMoviesBloc.state)
+        .thenReturn(PopularMoviesLoaded(testMovieList));
+    when(() => mockTopRatedMoviesBloc.state)
+        .thenReturn(TopRatedMoviesLoaded(testMovieList));
+
+    await tester.pumpWidget(makeTestableWidget(const HomeMoviePage()));
+
+    tester.state<ScaffoldState>(find.byType(Scaffold).first).openDrawer();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    await tester.tap(find.widgetWithText(ListTile, 'About'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.text('About Page'), findsOneWidget);
   });
 }

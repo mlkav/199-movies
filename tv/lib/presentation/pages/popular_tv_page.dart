@@ -8,7 +8,7 @@ import 'package:tv/presentation/widgets/tv_card_list.dart';
 class PopularTVPage extends StatefulWidget {
   static const routeName = '/popular-tv';
 
-  const PopularTVPage({Key? key}) : super(key: key);
+  const PopularTVPage({super.key});
 
   @override
   PopularTVPageState createState() => PopularTVPageState();

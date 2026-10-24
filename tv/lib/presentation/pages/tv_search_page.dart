@@ -9,7 +9,7 @@ import 'package:tv/presentation/widgets/tv_card_list.dart';
 class TVSearchPage extends StatelessWidget {
   static const routeName = '/search-tv';
 
-  const TVSearchPage({Key? key}) : super(key: key);
+  const TVSearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +23,9 @@ class TVSearchPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
+              onChanged: (query) {
+                context.read<TVSearchBloc>().add(FetchTVSearch(query));
+              },
               onSubmitted: (query) {
                 context.read<TVSearchBloc>().add(FetchTVSearch(query));
               },
@@ -58,9 +61,7 @@ class TVSearchPage extends StatelessWidget {
                   );
                 } else if (state is TVSearchError) {
                   return Expanded(
-                    child: Center(
-                      child: Text(state.message),
-                    ),
+                    child: Text(state.message),
                   );
                 } else {
                   return Expanded(

@@ -24,7 +24,7 @@ class TVDetailPage extends StatefulWidget {
   static const routeName = '/detail-tv';
 
   final int id;
-  const TVDetailPage({Key? key, required this.id}) : super(key: key);
+  const TVDetailPage({super.key, required this.id});
 
   @override
   TVDetailPageState createState() => TVDetailPageState();
@@ -76,7 +76,7 @@ class TVDetailPageState extends State<TVDetailPage> {
 class DetailContent extends StatelessWidget {
   final TVDetail tv;
 
-  const DetailContent(this.tv, {Key? key}) : super(key: key);
+  const DetailContent(this.tv, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -99,10 +99,9 @@ class _TVPosterBackground extends StatelessWidget {
   final double screenWidth;
 
   const _TVPosterBackground({
-    Key? key,
     required this.posterPath,
     required this.screenWidth,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +117,7 @@ class _TVPosterBackground extends StatelessWidget {
 }
 
 class _TVBackButton extends StatelessWidget {
-  const _TVBackButton({Key? key}) : super(key: key);
+  const _TVBackButton();
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +140,7 @@ class _TVBackButton extends StatelessWidget {
 class _DraggableTVDetailSheet extends StatelessWidget {
   final TVDetail tv;
 
-  const _DraggableTVDetailSheet({Key? key, required this.tv}) : super(key: key);
+  const _DraggableTVDetailSheet({required this.tv});
 
   @override
   Widget build(BuildContext context) {
@@ -185,7 +184,7 @@ class _DraggableTVDetailSheet extends StatelessWidget {
 class _TVSheetContent extends StatelessWidget {
   final TVDetail tv;
 
-  const _TVSheetContent({Key? key, required this.tv}) : super(key: key);
+  const _TVSheetContent({required this.tv});
 
   @override
   Widget build(BuildContext context) {
@@ -223,7 +222,7 @@ class _TVSheetContent extends StatelessWidget {
 class _TVWatchlistButton extends StatelessWidget {
   final TVDetail tv;
 
-  const _TVWatchlistButton({Key? key, required this.tv}) : super(key: key);
+  const _TVWatchlistButton({required this.tv});
 
   @override
   Widget build(BuildContext context) {
@@ -272,7 +271,7 @@ class _TVWatchlistButton extends StatelessWidget {
 class _TVRatingBar extends StatelessWidget {
   final double voteAverage;
 
-  const _TVRatingBar({Key? key, required this.voteAverage}) : super(key: key);
+  const _TVRatingBar({required this.voteAverage});
 
   @override
   Widget build(BuildContext context) {
@@ -298,10 +297,9 @@ class _TVSeasonsList extends StatelessWidget {
   final int tvId;
 
   const _TVSeasonsList({
-    Key? key,
     required this.seasons,
     required this.tvId,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -377,258 +375,171 @@ class _TVSeasonsList extends StatelessWidget {
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
       builder: (context) {
-        return DraggableScrollableSheet(
-          expand: false,
-          initialChildSize: 0.65,
-          minChildSize: 0.4,
-          maxChildSize: 0.9,
-          builder: (context, scrollController) {
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: SingleChildScrollView(
-                controller: scrollController,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: Container(
-                        width: 40,
-                        height: 4,
-                        decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(2),
-                        ),
-                      ),
+        return _SeasonDetailBottomSheetContent(season: season);
+      },
+    );
+  }
+}
+
+class _SeasonDetailBottomSheetContent extends StatelessWidget {
+  final Season season;
+
+  const _SeasonDetailBottomSheetContent({required this.season});
+
+  @override
+  Widget build(BuildContext context) {
+    return DraggableScrollableSheet(
+      expand: false,
+      initialChildSize: 0.65,
+      minChildSize: 0.4,
+      maxChildSize: 0.9,
+      builder: (context, scrollController) {
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            controller: scrollController,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(2),
                     ),
-                    const SizedBox(height: 16),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: season.posterPath != null
-                              ? CachedNetworkImage(
-                                  imageUrl:
-                                      '$BASE_IMAGE_URL${season.posterPath}',
-                                  width: 90,
-                                  height: 130,
-                                  fit: BoxFit.cover,
-                                  placeholder: (context, url) => const Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
-                                )
-                              : Container(
-                                  width: 90,
-                                  height: 130,
-                                  color: Colors.grey.shade800,
-                                  child: const Icon(Icons.tv, size: 40),
-                                ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                season.name,
-                                style: kHeading6,
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                'Season ${season.seasonNumber}',
-                                style: kSubtitle,
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                'Total Episodes: ${season.episodeCount}',
-                                style: const TextStyle(
-                                  color: kMikadoYellow,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              if (season.airDate != null &&
-                                  season.airDate!.isNotEmpty) ...[
-                                const SizedBox(height: 4),
-                                Text(
-                                  'Air Date: ${season.airDate}',
-                                  style: const TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ],
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Overview',
-                      style: kHeading6,
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      season.overview.isNotEmpty
-                          ? season.overview
-                          : 'No overview available for this season.',
-                      style: kBodyText,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Episodes List',
-                      style: kHeading6,
-                    ),
-                    const SizedBox(height: 8),
-                    BlocBuilder<TVSeasonDetailBloc, TVSeasonDetailState>(
-                      builder: (context, state) {
-                        if (state is TVSeasonDetailLoading) {
-                          return const Center(
-                            child: Padding(
-                              padding: EdgeInsets.all(16.0),
-                              child: CircularProgressIndicator(),
-                            ),
-                          );
-                        } else if (state is TVSeasonDetailLoaded) {
-                          final episodes = state.seasonDetail.episodes;
-                          if (episodes.isEmpty) {
-                            return const Text('No episodes available.');
-                          }
-                          return ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: episodes.length,
-                            itemBuilder: (context, index) {
-                              final episode = episodes[index];
-                              return Card(
-                                color: kOxfordBlue,
-                                margin: const EdgeInsets.symmetric(vertical: 4),
-                                child: InkWell(
-                                  onTap: () =>
-                                      _playEpisodeVideo(context, episode),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                          child: episode.stillPath != null
-                                              ? CachedNetworkImage(
-                                                  imageUrl:
-                                                      '$BASE_IMAGE_URL${episode.stillPath}',
-                                                  width: 100,
-                                                  height: 65,
-                                                  fit: BoxFit.cover,
-                                                  placeholder: (context, url) =>
-                                                      const Center(
-                                                    child:
-                                                        CircularProgressIndicator(),
-                                                  ),
-                                                  errorWidget: (context, url,
-                                                          error) =>
-                                                      const Icon(Icons.error),
-                                                )
-                                              : Container(
-                                                  width: 100,
-                                                  height: 65,
-                                                  color: Colors.grey.shade800,
-                                                  child: const Icon(
-                                                    Icons.movie_outlined,
-                                                    color: Colors.grey,
-                                                  ),
-                                                ),
-                                        ),
-                                        const SizedBox(width: 12),
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'E${episode.episodeNumber}. ${episode.name}',
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                              const SizedBox(height: 4),
-                                              Row(
-                                                children: [
-                                                  if (episode.runtime !=
-                                                      null) ...[
-                                                    Text(
-                                                      '${episode.runtime}m',
-                                                      style: const TextStyle(
-                                                        fontSize: 12,
-                                                        color: Colors.grey,
-                                                      ),
-                                                    ),
-                                                    const SizedBox(width: 8),
-                                                  ],
-                                                  const Icon(
-                                                    Icons.star,
-                                                    size: 14,
-                                                    color: kMikadoYellow,
-                                                  ),
-                                                  const SizedBox(width: 2),
-                                                  Text(
-                                                    '${episode.voteAverage}',
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
-                                                  ),
-                                                ],
-                                              ),
-                                              const SizedBox(height: 4),
-                                              Text(
-                                                episode.overview.isNotEmpty
-                                                    ? episode.overview
-                                                    : 'No description available.',
-                                                style: const TextStyle(
-                                                  fontSize: 12,
-                                                  color: Colors.white70,
-                                                ),
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        const Icon(
-                                          Icons.play_circle_fill,
-                                          color: kMikadoYellow,
-                                          size: 32,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          );
-                        } else if (state is TVSeasonDetailError) {
-                          return Text(state.message);
-                        } else {
-                          return const SizedBox();
-                        }
-                      },
-                    ),
-                    const SizedBox(height: 16),
-                  ],
+                  ),
                 ),
-              ),
-            );
-          },
+                const SizedBox(height: 16),
+                _SeasonHeaderRow(season: season),
+                const SizedBox(height: 16),
+                Text('Overview', style: kHeading6),
+                const SizedBox(height: 8),
+                Text(
+                  season.overview.isNotEmpty
+                      ? season.overview
+                      : 'No overview available for this season.',
+                  style: kBodyText,
+                ),
+                const SizedBox(height: 16),
+                Text('Episodes List', style: kHeading6),
+                const SizedBox(height: 8),
+                const _EpisodesListBlocBuilder(),
+                const SizedBox(height: 16),
+              ],
+            ),
+          ),
         );
       },
     );
   }
+}
+
+class _SeasonHeaderRow extends StatelessWidget {
+  final Season season;
+
+  const _SeasonHeaderRow({required this.season});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: season.posterPath != null
+              ? CachedNetworkImage(
+                  imageUrl: '$BASE_IMAGE_URL${season.posterPath}',
+                  width: 90,
+                  height: 130,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                )
+              : Container(
+                  width: 90,
+                  height: 130,
+                  color: Colors.grey.shade800,
+                  child: const Icon(Icons.tv, size: 40),
+                ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(season.name, style: kHeading6),
+              const SizedBox(height: 4),
+              Text('Season ${season.seasonNumber}', style: kSubtitle),
+              const SizedBox(height: 4),
+              Text(
+                'Total Episodes: ${season.episodeCount}',
+                style: const TextStyle(
+                  color: kMikadoYellow,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              if (season.airDate != null && season.airDate!.isNotEmpty) ...[
+                const SizedBox(height: 4),
+                Text(
+                  'Air Date: ${season.airDate}',
+                  style: const TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _EpisodesListBlocBuilder extends StatelessWidget {
+  const _EpisodesListBlocBuilder();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<TVSeasonDetailBloc, TVSeasonDetailState>(
+      builder: (context, state) {
+        if (state is TVSeasonDetailLoading) {
+          return const Center(
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: CircularProgressIndicator(),
+            ),
+          );
+        } else if (state is TVSeasonDetailLoaded) {
+          final episodes = state.seasonDetail.episodes;
+          if (episodes.isEmpty) {
+            return const Text('No episodes available.');
+          }
+          return ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: episodes.length,
+            itemBuilder: (context, index) {
+              final episode = episodes[index];
+              return _EpisodeCardItem(episode: episode);
+            },
+          );
+        } else if (state is TVSeasonDetailError) {
+          return Text(state.message);
+        } else {
+          return const SizedBox();
+        }
+      },
+    );
+  }
+}
+
+class _EpisodeCardItem extends StatelessWidget {
+  final Episode episode;
+
+  const _EpisodeCardItem({required this.episode});
 
   void _playEpisodeVideo(BuildContext context, Episode episode) {
     showDialog(
@@ -708,10 +619,111 @@ class _TVSeasonsList extends StatelessWidget {
       },
     );
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: kOxfordBlue,
+      margin: const EdgeInsets.symmetric(vertical: 4),
+      child: InkWell(
+        onTap: () => _playEpisodeVideo(context, episode),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: episode.stillPath != null
+                    ? CachedNetworkImage(
+                        imageUrl: '$BASE_IMAGE_URL${episode.stillPath}',
+                        width: 100,
+                        height: 65,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                      )
+                    : Container(
+                        width: 100,
+                        height: 65,
+                        color: Colors.grey.shade800,
+                        child: const Icon(
+                          Icons.movie_outlined,
+                          color: Colors.grey,
+                        ),
+                      ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'E${episode.episodeNumber}. ${episode.name}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        if (episode.runtime != null) ...[
+                          Text(
+                            '${episode.runtime}m',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                        ],
+                        const Icon(
+                          Icons.star,
+                          size: 14,
+                          color: kMikadoYellow,
+                        ),
+                        const SizedBox(width: 2),
+                        Text(
+                          '${episode.voteAverage}',
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      episode.overview.isNotEmpty
+                          ? episode.overview
+                          : 'No description available.',
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.white70,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(
+                Icons.play_circle_fill,
+                color: kMikadoYellow,
+                size: 32,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class _TVRecommendationsList extends StatelessWidget {
-  const _TVRecommendationsList({Key? key}) : super(key: key);
+  const _TVRecommendationsList();
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,6 @@
 library core;
 
+export 'common/analytics_service.dart';
 export 'common/config.dart';
 export 'common/constants.dart';
 export 'common/exception.dart';

@@ -22,7 +22,7 @@ import 'package:tv/presentation/pages/watchlist_tv_page.dart';
 class HomeTVPage extends StatefulWidget {
   static const routeName = '/home-tv';
 
-  const HomeTVPage({Key? key}) : super(key: key);
+  const HomeTVPage({super.key});
 
   @override
   HomeTVPageState createState() => HomeTVPageState();
@@ -44,24 +44,21 @@ class HomeTVPageState extends State<HomeTVPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
-        child: Column(
+        child: ListView(
+          padding: EdgeInsets.zero,
           children: [
-            UserAccountsDrawerHeader(
+            const UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
-                backgroundImage: const AssetImage('assets/circle-g.png'),
-                backgroundColor: Colors.grey.shade900,
+                backgroundImage: AssetImage('assets/circle-g.png'),
               ),
-              accountName: const Text('Ditonton'),
-              accountEmail: const Text('ditonton@dicoding.com'),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade900,
-              ),
+              accountName: Text('Ditonton'),
+              accountEmail: Text('ditonton@dicoding.com'),
             ),
             ListTile(
               leading: const Icon(Icons.movie),
               title: const Text('Movies'),
               onTap: () {
-                Navigator.pushReplacementNamed(context, '/home');
+                Navigator.pushNamed(context, '/home');
               },
             ),
             ListTile(
@@ -198,7 +195,7 @@ class HomeTVPageState extends State<HomeTVPage> {
 class TVList extends StatelessWidget {
   final List<TV> tvList;
 
-  const TVList(this.tvList, {Key? key}) : super(key: key);
+  const TVList(this.tvList, {super.key});
 
   @override
   Widget build(BuildContext context) {

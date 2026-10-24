@@ -9,7 +9,7 @@ import 'package:movie/presentation/widgets/movie_card_list.dart';
 class SearchPage extends StatelessWidget {
   static const routeName = '/search';
 
-  const SearchPage({Key? key}) : super(key: key);
+  const SearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +23,9 @@ class SearchPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
+              onChanged: (query) {
+                context.read<MovieSearchBloc>().add(FetchMovieSearch(query));
+              },
               onSubmitted: (query) {
                 context.read<MovieSearchBloc>().add(FetchMovieSearch(query));
               },
@@ -58,9 +61,7 @@ class SearchPage extends StatelessWidget {
                   );
                 } else if (state is MovieSearchError) {
                   return Expanded(
-                    child: Center(
-                      child: Text(state.message),
-                    ),
+                    child: Text(state.message),
                   );
                 } else {
                   return Expanded(

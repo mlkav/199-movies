@@ -53,7 +53,7 @@ void main() {
               const Scaffold(body: Text('Watchlist TV')),
           '/home': (_) => const Scaffold(body: Text('Home Movie')),
           '/watchlist-movie': (_) =>
-              const Scaffold(body: Text('Watchlist Movies')),
+              const Scaffold(body: Text('Watchlist Movies Page')),
           '/about': (_) => const Scaffold(body: Text('About Page')),
         },
       ),
@@ -136,7 +136,27 @@ void main() {
     expect(find.text('Now Playing TV'), findsOneWidget);
   });
 
-  testWidgets('Should open drawer and navigate when item tapped',
+  testWidgets('Should open drawer and tap Movies', (WidgetTester tester) async {
+    when(() => mockNowPlayingTVBloc.state)
+        .thenReturn(NowPlayingTVLoaded(testTVList));
+    when(() => mockPopularTVBloc.state).thenReturn(PopularTVLoaded(testTVList));
+    when(() => mockTopRatedTVBloc.state)
+        .thenReturn(TopRatedTVLoaded(testTVList));
+
+    await tester.pumpWidget(makeTestableWidget(const HomeTVPage()));
+
+    tester.state<ScaffoldState>(find.byType(Scaffold).first).openDrawer();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    await tester.tap(find.widgetWithText(ListTile, 'Movies'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.text('Home Movie'), findsOneWidget);
+  });
+
+  testWidgets('Should open drawer and tap Watchlist Movies',
       (WidgetTester tester) async {
     when(() => mockNowPlayingTVBloc.state)
         .thenReturn(NowPlayingTVLoaded(testTVList));
@@ -146,17 +166,55 @@ void main() {
 
     await tester.pumpWidget(makeTestableWidget(const HomeTVPage()));
 
-    await tester.tap(find.byIcon(Icons.menu));
+    tester.state<ScaffoldState>(find.byType(Scaffold).first).openDrawer();
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
 
-    expect(find.text('Movies'), findsOneWidget);
-    expect(find.text('TV Series'), findsWidgets);
-
-    await tester.tap(find.text('Movies'));
+    await tester.tap(find.widgetWithText(ListTile, 'Watchlist Movies'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
 
-    expect(find.text('Home Movie'), findsOneWidget);
+    expect(find.text('Watchlist Movies Page'), findsOneWidget);
+  });
+
+  testWidgets('Should open drawer and tap Watchlist TV Series',
+      (WidgetTester tester) async {
+    when(() => mockNowPlayingTVBloc.state)
+        .thenReturn(NowPlayingTVLoaded(testTVList));
+    when(() => mockPopularTVBloc.state).thenReturn(PopularTVLoaded(testTVList));
+    when(() => mockTopRatedTVBloc.state)
+        .thenReturn(TopRatedTVLoaded(testTVList));
+
+    await tester.pumpWidget(makeTestableWidget(const HomeTVPage()));
+
+    tester.state<ScaffoldState>(find.byType(Scaffold).first).openDrawer();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    await tester.tap(find.widgetWithText(ListTile, 'Watchlist TV Series'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.text('Watchlist TV'), findsOneWidget);
+  });
+
+  testWidgets('Should open drawer and tap About', (WidgetTester tester) async {
+    when(() => mockNowPlayingTVBloc.state)
+        .thenReturn(NowPlayingTVLoaded(testTVList));
+    when(() => mockPopularTVBloc.state).thenReturn(PopularTVLoaded(testTVList));
+    when(() => mockTopRatedTVBloc.state)
+        .thenReturn(TopRatedTVLoaded(testTVList));
+
+    await tester.pumpWidget(makeTestableWidget(const HomeTVPage()));
+
+    tester.state<ScaffoldState>(find.byType(Scaffold).first).openDrawer();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    await tester.tap(find.widgetWithText(ListTile, 'About'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.text('About Page'), findsOneWidget);
   });
 }

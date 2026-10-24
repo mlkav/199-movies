@@ -66,6 +66,6 @@ void main() {
     await tester.testTextInput.receiveAction(TextInputAction.search);
 
     verify(() => mockMovieSearchBloc.add(const FetchMovieSearch('spiderman')))
-        .called(1);
+        .called(greaterThanOrEqualTo(1));
   });
 }

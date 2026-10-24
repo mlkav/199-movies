@@ -7,7 +7,7 @@ import 'package:tv/presentation/pages/tv_detail_page.dart';
 class TVCard extends StatelessWidget {
   final TV tv;
 
-  const TVCard(this.tv, {Key? key}) : super(key: key);
+  const TVCard(this.tv, {super.key});
 
   @override
   Widget build(BuildContext context) {

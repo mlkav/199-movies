@@ -9,7 +9,7 @@ import 'package:movie/presentation/widgets/movie_card_list.dart';
 class WatchlistMoviesPage extends StatefulWidget {
   static const routeName = '/watchlist-movie';
 
-  const WatchlistMoviesPage({Key? key}) : super(key: key);
+  const WatchlistMoviesPage({super.key});
 
   @override
   WatchlistMoviesPageState createState() => WatchlistMoviesPageState();

@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:core/common/config.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,7 +11,6 @@ const Color kRichBlack = Color(0xFF000814);
 const Color kOxfordBlue = Color(0xFF001D3D);
 const Color kPrussianBlue = Color(0xFF003566);
 const Color kMikadoYellow = Color(0xFFFFC300);
-const Color kDavysGrey = Color(0xFF4B5320);
 
 // text style
 final TextStyle kHeading5 =

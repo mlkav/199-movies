@@ -1,3 +1,4 @@
+import 'package:core/common/analytics_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/domain/usecases/get_watchlist_status.dart';
 import 'package:movie/domain/usecases/remove_watchlist.dart';
@@ -7,18 +8,23 @@ import 'package:movie/presentation/bloc/movie_watchlist_status/movie_watchlist_s
 
 class MovieWatchlistStatusBloc
     extends Bloc<MovieWatchlistStatusEvent, MovieWatchlistStatusState> {
-  static const watchlistAddSuccessMessage = 'Added to Watchlist';
-  static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
-
   final GetWatchListStatus getWatchListStatus;
   final SaveWatchlist saveWatchlist;
   final RemoveWatchlist removeWatchlist;
+  final AnalyticsService? analyticsService;
+
+  static const watchlistAddSuccessMessage = 'Added to Watchlist';
+  static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
 
   MovieWatchlistStatusBloc({
     required this.getWatchListStatus,
     required this.saveWatchlist,
     required this.removeWatchlist,
-  }) : super(MovieWatchlistStatusState.initial()) {
+    this.analyticsService,
+  }) : super(const MovieWatchlistStatusState(
+          isAddedToWatchlist: false,
+          message: '',
+        )) {
     on<LoadMovieWatchlistStatus>((event, emit) async {
       final status = await getWatchListStatus.execute(event.id);
       emit(state.copyWith(isAddedToWatchlist: status, message: ''));
@@ -36,6 +42,11 @@ class MovieWatchlistStatusBloc
             isAddedToWatchlist: status,
             message: successMessage,
           ));
+          analyticsService?.logAddToWatchlist(
+            contentType: 'movie',
+            itemId: event.movie.id.toString(),
+            title: event.movie.title,
+          );
         },
       );
     });
@@ -52,6 +63,11 @@ class MovieWatchlistStatusBloc
             isAddedToWatchlist: status,
             message: successMessage,
           ));
+          analyticsService?.logRemoveFromWatchlist(
+            contentType: 'movie',
+            itemId: event.movie.id.toString(),
+            title: event.movie.title,
+          );
         },
       );
     });

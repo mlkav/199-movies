@@ -6,6 +6,9 @@ import 'package:tv/tv.dart';
 final locator = GetIt.instance;
 
 void init() {
+  // Helper / Service
+  locator.registerLazySingleton(() => AnalyticsService());
+
   // BLoC / Cubit - Movie
   locator.registerFactory(
     () => NowPlayingMoviesBloc(locator()),
@@ -17,7 +20,10 @@ void init() {
     () => TopRatedMoviesBloc(locator()),
   );
   locator.registerFactory(
-    () => MovieDetailBloc(locator()),
+    () => MovieDetailBloc(
+      locator(),
+      analyticsService: locator(),
+    ),
   );
   locator.registerFactory(
     () => MovieRecommendationsBloc(locator()),
@@ -27,13 +33,17 @@ void init() {
       getWatchListStatus: locator(),
       saveWatchlist: locator(),
       removeWatchlist: locator(),
+      analyticsService: locator(),
     ),
   );
   locator.registerFactory(
     () => WatchlistMovieBloc(locator()),
   );
   locator.registerFactory(
-    () => MovieSearchBloc(locator()),
+    () => MovieSearchBloc(
+      locator(),
+      analyticsService: locator(),
+    ),
   );
 
   // BLoC / Cubit - TV Series
@@ -47,7 +57,10 @@ void init() {
     () => TopRatedTVBloc(getTopRatedTV: locator()),
   );
   locator.registerFactory(
-    () => TVDetailBloc(locator()),
+    () => TVDetailBloc(
+      locator(),
+      analyticsService: locator(),
+    ),
   );
   locator.registerFactory(
     () => TVRecommendationsBloc(locator()),
@@ -60,13 +73,17 @@ void init() {
       getWatchListTVStatus: locator(),
       saveWatchlistTV: locator(),
       removeWatchlistTV: locator(),
+      analyticsService: locator(),
     ),
   );
   locator.registerFactory(
     () => WatchlistTVBloc(locator()),
   );
   locator.registerFactory(
-    () => TVSearchBloc(locator()),
+    () => TVSearchBloc(
+      locator(),
+      analyticsService: locator(),
+    ),
   );
 
   // Use cases - Movie

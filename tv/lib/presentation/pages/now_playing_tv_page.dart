@@ -8,7 +8,7 @@ import 'package:tv/presentation/widgets/tv_card_list.dart';
 class NowPlayingTVPage extends StatefulWidget {
   static const routeName = '/now-playing-tv';
 
-  const NowPlayingTVPage({Key? key}) : super(key: key);
+  const NowPlayingTVPage({super.key});
 
   @override
   NowPlayingTVPageState createState() => NowPlayingTVPageState();

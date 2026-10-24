@@ -64,6 +64,7 @@ void main() {
     await tester.enterText(find.byType(TextField), 'got');
     await tester.testTextInput.receiveAction(TextInputAction.search);
 
-    verify(() => mockTVSearchBloc.add(const FetchTVSearch('got'))).called(1);
+    verify(() => mockTVSearchBloc.add(const FetchTVSearch('got')))
+        .called(greaterThanOrEqualTo(1));
   });
 }

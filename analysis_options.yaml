@@ -1,13 +1,8 @@
+include: package:flutter_lints/flutter.yaml
+
 analyzer:
   exclude:
     - build/**
     - android/**
     - ios/**
     - "**/*.mocks.dart"
-include: package:flutter_lints/flutter.yaml
-
-linter:
-  rules:
-    constant_identifier_names: false
-    non_constant_identifier_names: false
-    prefer_const_constructors: false

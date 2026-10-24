@@ -4,13 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/domain/entities/movie.dart';
 import 'package:movie/presentation/bloc/now_playing_movies/now_playing_movies_bloc.dart';
-import 'package:movie/presentation/bloc/now_playing_movies/now_playing_movies_event.dart';
 import 'package:movie/presentation/bloc/now_playing_movies/now_playing_movies_state.dart';
 import 'package:movie/presentation/bloc/popular_movies/popular_movies_bloc.dart';
-import 'package:movie/presentation/bloc/popular_movies/popular_movies_event.dart';
 import 'package:movie/presentation/bloc/popular_movies/popular_movies_state.dart';
 import 'package:movie/presentation/bloc/top_rated_movies/top_rated_movies_bloc.dart';
-import 'package:movie/presentation/bloc/top_rated_movies/top_rated_movies_event.dart';
 import 'package:movie/presentation/bloc/top_rated_movies/top_rated_movies_state.dart';
 import 'package:movie/presentation/pages/movie_detail_page.dart';
 import 'package:movie/presentation/pages/popular_movies_page.dart';
@@ -21,7 +18,7 @@ import 'package:movie/presentation/pages/watchlist_movies_page.dart';
 class HomeMoviePage extends StatefulWidget {
   static const routeName = '/home';
 
-  const HomeMoviePage({Key? key}) : super(key: key);
+  const HomeMoviePage({super.key});
 
   @override
   HomeMoviePageState createState() => HomeMoviePageState();
@@ -29,32 +26,18 @@ class HomeMoviePage extends StatefulWidget {
 
 class HomeMoviePageState extends State<HomeMoviePage> {
   @override
-  void initState() {
-    super.initState();
-    Future.microtask(() {
-      if (!mounted) return;
-      context.read<NowPlayingMoviesBloc>().add(FetchNowPlayingMovies());
-      context.read<PopularMoviesBloc>().add(FetchPopularMovies());
-      context.read<TopRatedMoviesBloc>().add(FetchTopRatedMovies());
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
-        child: Column(
+        child: ListView(
+          padding: EdgeInsets.zero,
           children: [
-            UserAccountsDrawerHeader(
+            const UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
-                backgroundImage: const AssetImage('assets/circle-g.png'),
-                backgroundColor: Colors.grey.shade900,
+                backgroundImage: AssetImage('assets/circle-g.png'),
               ),
-              accountName: const Text('Ditonton'),
-              accountEmail: const Text('ditonton@dicoding.com'),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade900,
-              ),
+              accountName: Text('Ditonton'),
+              accountEmail: Text('ditonton@dicoding.com'),
             ),
             ListTile(
               leading: const Icon(Icons.movie),
@@ -196,7 +179,7 @@ class HomeMoviePageState extends State<HomeMoviePage> {
 class MovieList extends StatelessWidget {
   final List<Movie> movies;
 
-  const MovieList(this.movies, {Key? key}) : super(key: key);
+  const MovieList(this.movies, {super.key});
 
   @override
   Widget build(BuildContext context) {

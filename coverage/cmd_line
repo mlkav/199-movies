@@ -1,0 +1,1 @@
+genhtml coverage/test.info -o coverage --no-function-coverage --prefix /home/ald/Documents/dicoding/199-movies

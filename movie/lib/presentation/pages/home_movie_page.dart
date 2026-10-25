@@ -47,6 +47,9 @@ class HomeMoviePageState extends State<HomeMoviePage> {
           padding: EdgeInsets.zero,
           children: [
             const UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.grey,
+              ),
               currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage('assets/circle-g.png'),
               ),

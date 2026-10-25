@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/domain/entities/movie.dart';
 import 'package:movie/presentation/bloc/now_playing_movies/now_playing_movies_bloc.dart';
+import 'package:movie/presentation/bloc/now_playing_movies/now_playing_movies_event.dart';
 import 'package:movie/presentation/bloc/now_playing_movies/now_playing_movies_state.dart';
 import 'package:movie/presentation/bloc/popular_movies/popular_movies_bloc.dart';
+import 'package:movie/presentation/bloc/popular_movies/popular_movies_event.dart';
 import 'package:movie/presentation/bloc/popular_movies/popular_movies_state.dart';
 import 'package:movie/presentation/bloc/top_rated_movies/top_rated_movies_bloc.dart';
+import 'package:movie/presentation/bloc/top_rated_movies/top_rated_movies_event.dart';
 import 'package:movie/presentation/bloc/top_rated_movies/top_rated_movies_state.dart';
 import 'package:movie/presentation/pages/movie_detail_page.dart';
 import 'package:movie/presentation/pages/popular_movies_page.dart';
@@ -25,6 +28,17 @@ class HomeMoviePage extends StatefulWidget {
 }
 
 class HomeMoviePageState extends State<HomeMoviePage> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      if (!mounted) return;
+      context.read<NowPlayingMoviesBloc>().add(FetchNowPlayingMovies());
+      context.read<PopularMoviesBloc>().add(FetchPopularMovies());
+      context.read<TopRatedMoviesBloc>().add(FetchTopRatedMovies());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
